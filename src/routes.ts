@@ -1,10 +1,20 @@
 import { Router } from "express";
-import { FeedbackController } from "./Feedback";
+import { SubmitFeedback } from "./functions/submitFeeback";
+import { PrismaFeedbackRepostory } from "./repositories/PrismaFeedbackRepository";
 
 const router = Router();
 
-const controller = new FeedbackController();
+router.post("/feedback/create", async (req, res) => {
+  const prismaFeedbackRepository = new PrismaFeedbackRepostory();
+  const submitFeedback = new SubmitFeedback(prismaFeedbackRepository);
 
-router.post("/feedback/create", controller.handle);
+  await submitFeedback.execute({
+    type: req.body.type,
+    comment: req.body.comment,
+    screenshot: req.body.screenshot,
+  });
+
+  res.status(201).send();
+});
 
 export { router };

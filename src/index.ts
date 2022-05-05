@@ -1,16 +1,14 @@
-import express from 'express'
-import 'dotenv/config'
-import { FeedbacksController } from './controllers/Feedbacks'
+import express from "express";
 
-const app = express()
-const PORT = process.env.PORT || 3333
+import "dotenv/config";
+import { router } from "./routes";
 
-app.use(express.json())
+const app = express();
+const PORT = process.env.PORT || 3333;
 
-const controller = new FeedbacksController()
-
-app.post('/feedback/create', controller.handle)
+app.use(express.json());
+app.use(router);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
-})
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
