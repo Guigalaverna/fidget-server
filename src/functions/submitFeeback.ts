@@ -28,7 +28,7 @@ export class SubmitFeedback {
       throw new Error("Invalid screenshot");
     }
 
-    const feedback = await this.feedbackRepository.create({
+    await this.feedbackRepository.create({
       type,
       comment,
       screenshot,
@@ -44,7 +44,5 @@ export class SubmitFeedback {
         "</div>",
       ].join("\n"),
     });
-
-    return feedback;
   }
 }

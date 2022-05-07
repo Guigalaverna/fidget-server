@@ -20,7 +20,7 @@ router.post("/feedback/create", async (req, res) => {
     screenshot: req.body.screenshot,
   });
 
-  res.status(201).send();
+  return res.status(201).json({});
 });
 
 export { router };
